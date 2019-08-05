@@ -6,9 +6,10 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const jwt = require('./helpers/jwt')
 const errorHandler = require('./helpers/error-handler')
-const auth = require('./routes/auth/credentials')
-const user = require('./routes/api-controller')
 const http = require('http')
+const auth = require('./routes/auth/credentials')
+const user = require('./routes/c/users')
+const animal = require('./routes/c/animal')
 
 const port = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
@@ -78,6 +79,7 @@ server.on('error', error => {
 // api routes
 app.use('/api/signin', [logIncomingRequest], auth)
 app.use('/api/user', [logIncomingRequest], user)
+app.use('/api/animal', [logIncomingRequest], animal)
 
 // global error handler
 app.use(errorHandler)

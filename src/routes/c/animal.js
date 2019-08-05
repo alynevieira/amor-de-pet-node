@@ -2,41 +2,40 @@
 
 const express = require('express')
 const router = express.Router()
-const api = require('./api')
+const animal = require('../animal')
 
-// routes
 router.get('/', getAll)
-router.get('/current', getCurrent)
+router.post('/register', register)
 router.get('/:id', getById)
 router.put('/:id', update)
 router.delete('/:id', _delete)
 
 function getAll(req, res, next) {
-    api.getAll()
-        .then(users => res.json(users))
+    animal.getAll()
+        .then(animal => res.json(animal))
         .catch(err => next(err))
 }
 
-function getCurrent(req, res, next) {
-    api.getById(req.user.sub)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
+function register(req, res, next) {
+    animal.create(req.body)
+        .then(() => res.json({}))
         .catch(err => next(err))
 }
 
 function getById(req, res, next) {
-    api.getById(req.params.id)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
+    animal.getById(req.params.id)
+        .then(animal => animal ? res.json(animal) : res.sendStatus(404))
         .catch(err => next(err))
 }
 
 function update(req, res, next) {
-    api.update(req.params.id, req.body)
+    animal.update(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err))
 }
 
 function _delete(req, res, next) {
-    api.delete(req.params.id)
+    animal.delete(req.params.id)
         .then(() => res.json({}))
         .catch(err => next(err))
 }
