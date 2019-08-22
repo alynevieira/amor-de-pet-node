@@ -13,7 +13,8 @@ function jwt() {
             // public routes that don't require authentication
             '/api/signin/authenticate',
             '/api/signin/register',
-            '/api/signin/forgetPassword'
+            '/api/signin/forgetPassword',
+            '/api/signin/newPassword'
         ]
     });
 }

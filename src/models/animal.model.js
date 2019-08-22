@@ -8,8 +8,7 @@ const schema = new Schema({
     type: String,
     race: String,
     gender: String,
-    date: String,
-    createdDate: { type: Date, default: Date.now }
+    date: String
 });
 
 schema.set('toJSON', { virtuals: true })

@@ -4,11 +4,11 @@ const db = require('../helpers/db')
 const Animal = db.Animal
 
 async function getAll() {
-    return await Animal.find().select('-password')
+    return await Animal.find()
 }
 
 async function getById(id) {
-    return await Animal.findById(id).select('-password')
+    return await Animal.findById(id)
 }
 
 async function create(param) {
@@ -18,9 +18,11 @@ async function create(param) {
 }
 
 async function update(id, userParam) {
-    const user = await Animal.findById(id)
+    const animal = await Animal.findById(id)
+
+    Object.assign(animal, userParam)
     
-    await user.save()
+    await animal.save()
 }
 
 async function _delete(id) {
